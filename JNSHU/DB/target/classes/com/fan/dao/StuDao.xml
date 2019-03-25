@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fan.dao.StuDao">
+    <!-- 插入返回自增id，useGeneratekyes这段要设置 -->
+    <insert id="doCreate"  useGeneratedKeys="true" keyProperty="id">
+        insert into stu(name,qq,major,graduate,reportlink,wish,create_at) values(#{name},#{qq},#{major},#{graduate},#{reportlink},#{wish},#{create_at})
+    </insert>
+    <insert id="doCreate1" useGeneratedKeys="true" keyProperty="id">
+        insert into stu(name,qq,major,graduate,reportlink,wish,create_at) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.name},#{item.qq},#{item.major},#{item.graduate},#{item.reportlink},#{item.wish},#{item.create_at})
+        </foreach>
+    </insert>
+
+    <update id="doUpdate" parameterType="com.fan.pojo.Stu">
+        update stu
+        <set>
+            <if test="name!=null ">
+                name=#{name},
+            </if>
+            <if test="qq!=null">
+                qq=#{qq},
+            </if>
+            <if test="major!=null">
+                major=#{major},
+            </if>
+            <if test="graduate!=null">
+                graduate=#{graduate},
+            </if>
+            <if test="reportlink!=null">
+                reportlink=#{reportlink},
+            </if>
+            <if test="wish!=null">
+                wish=#{wish},
+            </if>
+            <if test="update_at!=null">
+                update_at=#{update_at},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="doRemove" parameterType="int">
+         delete  from stu where id=#{id}
+    </delete>
+    <select id="queryById"  resultType="com.fan.pojo.Stu">
+        select * from stu where id=#{id}
+    </select>
+    <select id="queryAll"  resultType="com.fan.pojo.Stu">
+        select * from stu
+    </select>
+    <!-- 模糊查询 -->
+    <select id="queryByInf"  resultType="com.fan.pojo.Stu">
+        select * from stu
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="name!=null">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+    <select id="queryByName" parameterType="String" resultType="com.fan.pojo.Stu">
+            select * from stu where name like concat('%',#{name},'%')
+    </select>
+</mapper>

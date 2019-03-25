@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--<context:component-scan base-package="com.fan.dao" />-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc.properties"></property>
+    </bean>
+    <bean id="dataSource"  class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <!-- 连接池启动时候的初始连接数 -->
+        <property name="initialSize" value="10"/>
+        <!-- 最小空闲值 -->
+        <property name="minIdle" value="5"/>
+        <!-- 最大空闲值 -->
+        <property name="maxIdle" value="20"/>
+        <property name="maxWait" value="2000"/>
+        <!-- 连接池最大值 -->
+        <property name="maxActive" value="50"/>
+        <property name="logAbandoned" value="true"/>
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="180"/>
+    </bean>
+    <!--<JDBCTemplate注入依赖>-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <bean id="stuDao0" class="com.fan.dao.StuDaoImp">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+
+    <!--<mybatis代理实现类>-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation" value="classpath:mybatis_config.xml"></property>
+    </bean>
+    <!--<StuDao实现类代理一>-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.fan.dao"></property>
+    </bean>
+    <!--&lt;!&ndash;<StuDao实现类代理二>&ndash;&gt;-->
+    <!--<bean id="stuDao" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+    <!--<property name="mapperInterface" value="com.fan.dao.stuDao" />-->
+    <!--<property name="sqlSessionFactory" ref="sqlSessionFactory" />-->
+    <!--</bean>-->
+
+
+    <bean id="stuService" class="com.fan.servcie.StuServiceImp">
+        <property name="stuDao" ref="stuDao"></property>
+        <property name="stuDao0" ref="stuDao0"></property>
+    </bean>
+</beans>
