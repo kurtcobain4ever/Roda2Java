@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="mapper.UserMapper"就是mapper(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="com.fan.dao.UserDao">
+
+    <select id="getAllUser"  resultType="com.fan.pojo.User" >
+    select * from users
+    </select>
+    <select id="getUser"  resultType="com.fan.pojo.User">
+        select * from users
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="name!=null">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+    <select id="getUserById"  resultType="com.fan.pojo.User">
+        select * from Users
+        <where>
+            <if test="id1!=0">
+                and id&gt;#{id1}
+            </if>
+            <if test="id2 !=null">
+                and id&lt;#{id2}
+            </if>
+        </where>
+    </select>
+    <!-- 模糊查询 -->
+    <select id="getUserByName" parameterType="String" resultType="com.fan.pojo.User">
+            select * from users where name like concat('%',#{name},'%')
+    </select>
+    <select id="getPage" resultType="com.fan.pojo.User">
+        select * from users limit (page-1)*size,size
+    </select>
+
+    <delete id="deleteUser" parameterType="int" >
+         delete  from users where id=#{id}
+    </delete>
+    <!-- 插入返回自增id，userGeneratekyes这段要设置 -->
+    <insert id="insertUser"  useGeneratedKeys="true" keyProperty="id">
+         insert into users(name,age) values (#{name},#{age})
+    </insert>
+    <update id="updateUser" parameterType="com.fan.pojo.User">
+        update users 
+        <set>
+            <if test="name!=null ">
+                name=#{name},
+            </if>
+            <if test="age!=null">
+                age=#{age},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+</mapper>
