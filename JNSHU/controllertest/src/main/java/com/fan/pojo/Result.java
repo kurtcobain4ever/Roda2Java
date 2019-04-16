@@ -1,25 +1,32 @@
 package com.fan.pojo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Result {
-    private String message;
     private int code;
-    private User data;
-    public String getMessage() {
-        return message;
+    private String message;
+
+    public Result() {
     }
-    public void setMessage(String message) {
+
+    public Result(int code, String message) {
+        this.code = code;
         this.message = message;
     }
+
     public int getCode() {
         return code;
     }
+
     public void setCode(int code) {
         this.code = code;
     }
-    public User getData() {
-        return data;
+
+    public String getMessage() {
+        return message;
     }
-    public void setData(User data) {
-        this.data = data;
+    public void setMessage(String message){
+        this.message=message;
     }
 }

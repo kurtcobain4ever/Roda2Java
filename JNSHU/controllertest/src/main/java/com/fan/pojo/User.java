@@ -1,5 +1,8 @@
 package com.fan.pojo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class User {
 
     //实体类的属性和表的字段名称一一对应

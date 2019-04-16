@@ -21,12 +21,12 @@
         </where>
     </select>
     <select id="getUserById"  resultType="com.fan.pojo.User">
-        select * from Users
+        select * from users
         <where>
             <if test="id1!=0">
                 and id&gt;#{id1}
             </if>
-            <if test="id2 !=null">
+            <if test="id2!=null">
                 and id&lt;#{id2}
             </if>
         </where>
@@ -36,7 +36,7 @@
             select * from users where name like concat('%',#{name},'%')
     </select>
     <select id="getPage" resultType="com.fan.pojo.User">
-        select * from users limit (page-1)*size,size
+        select * from users limit #{index},#{size}
     </select>
 
     <delete id="deleteUser" parameterType="int" >

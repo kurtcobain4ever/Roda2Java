@@ -56,4 +56,13 @@ public class UserServiceTest {
         user.setAge(999);
         userService.updateUser(user);
     }
+    @Test
+    public void testPage(){
+        int page=2;
+        int size=10;
+        List<User> users=userService.getPage(page,size);
+        for(User user:users){
+            System.out.println(user);
+        }
+    }
 }

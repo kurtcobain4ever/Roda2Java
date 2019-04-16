@@ -10,7 +10,7 @@ public interface UserDao{
     public List<User> getAllUser();
     public List<User> getUser(User user);
     public List<User> getUserByName(String name);
-    public List<User> getPage(@Param("page")int page,@Param("size")int size);
+    public List<User> getPage(@Param("index")int index,@Param("size")int size);
     public List<User> getUserById(@Param("id1") int minid, @Param("id2") int maxid);
     public boolean deleteUser(int id);
     public boolean insertUser(User user);
