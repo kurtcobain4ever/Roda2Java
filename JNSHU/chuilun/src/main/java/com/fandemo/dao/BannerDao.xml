@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="mapper.UserMapper"就是mapper(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="com.fandemo.dao.BannerDao">
+    <!-- 搜索 -->
+    <select id="doGetAll" resultType="com.fandemo.pojo.po.Banner">
+         select * from banner
+    </select>
+    <select id="doGetById" parameterType="int" resultType="com.fandemo.pojo.po.Banner">
+         select * from banner where id=#{id}
+    </select>
+    <select id="doGetUploda"  resultType="com.fandemo.pojo.po.Banner">
+         select * from banner where status=1
+    </select>
+    <delete id="doDelete" parameterType="int" >
+         delete  from banner where id=#{id}
+    </delete>
+    <!-- 插入返回自增id，useGenerateKeys这段要设置 -->
+    <insert id="doCreate"  useGeneratedKeys="true" keyProperty="id">
+         insert into banner(name,url,loc,ind,status,editor_id,create_at)
+         values (#{name},#{url},#{loc},#{ind},#{status},#{editor_id},#{create_at})
+    </insert>
+    <update id="doUpdate" parameterType="com.fandemo.pojo.po.Banner">
+        update banner
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="url!=null">
+                url=#{url},
+            </if>
+            <if test="loc!=null">
+                loc=#{loc},
+            </if>
+            <if test="ind!=0">
+                ind=#{ind},
+            </if>
+            <if test="status!=null">
+                status=#{status},
+            </if>
+            <if test="editor_id!=null">
+                editor_id=#{editor_id},
+            </if>
+            update_at=#{update_at},
+        </set>
+        where id=#{id}
+    </update>
+    <update id="doLoad" parameterType="int">
+        update banner set status=#{status},editor_id=#{editor_id} where id=#{id}
+    </update>
+</mapper>
