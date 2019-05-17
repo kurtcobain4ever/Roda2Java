@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="mapper.UserMapper"就是mapper(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="com.fandemo.dao.TitleDao">
+    <!-- 搜索 -->
+    <select id="doGetAll" resultType="com.fandemo.pojo.po.Title">
+         select * from title
+    </select>
+    <select id="doGetById" parameterType="int" resultType="com.fandemo.pojo.po.Title">
+         select * from title where id=#{id}
+    </select>
+    <select id="doGetUploda"  resultType="com.fandemo.pojo.po.Title">
+         select * from title where status=1
+    </select>
+    <select id="doGetSetList"  resultType="com.fandemo.pojo.po.Title">
+         select * from title where parent_id=0
+    </select>
+    <select id="doGetThemeList" parameterType="java.util.List" resultType="com.fandemo.pojo.po.Title">
+         select * from title where parent_id=#{set_id}
+    </select>
+    <select id="doGetUploadSetList"  resultType="com.fandemo.pojo.po.Title">
+         select * from title where parent_id=0 and status=1
+    </select>
+    <select id="doGetUploadThemeList" parameterType="java.util.List" resultType="com.fandemo.pojo.po.Title">
+         select * from title where parent_id=#{set_id} and status=1
+    </select>
+    <delete id="doDelete" parameterType="int">
+         delete  from title where id=#{id}
+    </delete>
+    <!-- 插入返回自增id，useGenerateKeys这段要设置 -->
+    <insert id="doCreate"  useGeneratedKeys="true" keyProperty="id">
+         insert into title(name,level,parent_id,status,seq,editor_id,create_at)
+         values (#{name},#{level},#{parent_id},#{status},#{seq},#{editor_id},#{create_at})
+    </insert>
+    <update id="doUpdate" parameterType="com.fandemo.pojo.po.Title">
+        update title
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="level!=0">
+                level=#{level},
+            </if>
+            <if test="parent_id!=0">
+                parent_id=#{parent_id},
+            </if>
+            <if test="status!=null">
+                status=#{status},
+            </if>
+            <if test="seq!=0">
+                seq=#{seq},
+            </if>
+            <if test="editor_id!=null">
+                editor_id=#{editor_id},
+            </if>
+            update_at=#{update_at},
+        </set>
+        where id=#{id}
+    </update>
+    <update id="doLoad" >
+        update title set status=#{status} where id=#{id}
+    </update>
+    <select id="doGetChild" parameterType="java.util.List" resultType="com.fandemo.pojo.po.Title">
+            select * from title where id in
+            <foreach collection="ids" open="(" close=")" separator="," item="id">
+                #{id}
+            </foreach>
+    </select>
+    <select id="doGetChildList" resultType="com.fandemo.pojo.po.Title">
+        select * from title where parent_id=#{id}
+    </select>
+</mapper>

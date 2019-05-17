@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="mapper.UserMapper"就是mapper(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="com.fandemo.dao.WorksDao">
+    <!-- 搜索 -->
+    <select id="doGetAll" resultType="com.fandemo.pojo.po.Works">
+         select * from works
+    </select>
+    <select id="doGetById" parameterType="int" resultType="com.fandemo.pojo.po.Works">
+         select * from works where id=#{id}
+    </select>
+    <select id="doGetUploda"  resultType="com.fandemo.pojo.po.Works">
+         select * from works where status=1
+    </select>
+    <select id="doGetList" resultType="com.fandemo.pojo.po.Works">
+        select * from works where title_id=#{title_id} limit #{start},#{size}
+    </select>
+    <delete id="doDelete" parameterType="int" >
+         delete  from works where id=#{id}
+    </delete>
+    <select id="doSearch"  resultType="com.fandemo.pojo.po.Works">
+        select * from works where works_name like concat('%',#{words},'%') and status=1 limit #{start},#{size}
+    </select>
+    <!-- 插入返回自增id，useGenerateKeys这段要设置 -->
+    <insert id="doCreate"  useGeneratedKeys="true" keyProperty="id">
+         insert into works(works_name,title_id,status,loc,editor_id,create_at)
+         values (#{works_name},#{title_id},#{status},#{loc},#{editor_id},#{create_at})
+    </insert>
+    <update id="doUpdate" parameterType="com.fandemo.pojo.po.Works">
+        update works
+         <set>
+             <if test="works_name!=null">
+                works_name=#{works_name},
+             </if>
+             <if test="title_id!=null">
+                 title_id=#{title_id},
+             </if>
+             <if test="status!=null">
+                status=#{status},
+             </if>
+             <if test="editor_id!=null">
+                editor_id=#{editor_id},
+             </if>
+             update_at=#{update_at},
+         </set>
+        where id=#{id}
+    </update>
+    <update id="doLoad" >
+        update works set status=#{status} where id=#{id}
+    </update>
+    <update id="doLoadByTitle">
+        update works set status=#{status} where title_id=#{title_id}
+    </update>
+
+</mapper>
