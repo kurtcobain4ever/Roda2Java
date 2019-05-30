@@ -10,7 +10,6 @@ import java.util.List;
 public class StudentServiceImp implements StudentService{
     @Autowired
     StudentDao studentDao;
-    @Autowired
     public List<Student> doGetStudent() {
         return studentDao.getAllStudentBySalary();
     }

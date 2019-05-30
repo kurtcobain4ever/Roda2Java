@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="mapper.UserMapper"就是mapper(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="com.fan.demo.dao.AccountDao">
+    <select id="doLogin" resultType="com.fan.demo.po.Account">
+        select * from account where username=#{username} and password=#{password}
+    </select>
+    <insert id="doRegister" parameterType="com.fan.demo.po.Account" useGeneratedKeys="true" keyProperty="id">
+        insert into account(nickname,username,password,create_at,update_at)
+        values (#{nickname},#{username},#{password},#{create_at},#{update_at})
+    </insert>
+    <select id="doGetByUsername" resultType="com.fan.demo.po.Account">
+        select * from account where username=#{username}
+    </select>
+    <select id="doGetUserInfo" resultType="com.fan.demo.po.Account">
+        select * from account where username=#{username}
+    </select>
+</mapper>

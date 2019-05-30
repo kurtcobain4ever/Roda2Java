@@ -3,6 +3,8 @@
   margin: 0; }
 
 .top {
+  display: flex;
+  justify-content: space-between;
   height: 39px;
   line-height: 39px; }
   .top p {
@@ -13,7 +15,11 @@
   .top img {
     float: right;
     margin-top: 9px; }
+.loginR{
+  display: flex;
+  flex-flow: row nowrap;
 
+}
 .nav1 {
   background-color: #29b078;
   overflow: hidden;

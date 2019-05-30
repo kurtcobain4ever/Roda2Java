@@ -21,7 +21,7 @@
     </div>
     <div class="text-right col-sm-4">
     <p>微信公众号</p>
-    <img src="static/images/2524.jpg">
+    <img src="${pageContext.request.contextPath}/static/images/2524.jpg">
     </div>
     </div>
 

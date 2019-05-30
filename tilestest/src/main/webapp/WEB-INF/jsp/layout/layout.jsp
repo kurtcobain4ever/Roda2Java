@@ -6,6 +6,9 @@
     <head>
     <meta charset="utf-8">
     <title>无标题文档</title>
+    <%--login--%>
+    <link href="<c:url value='/static/t11/task4.css' />" rel="stylesheet"/>
+    <%--home--%>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" charset="UTF-8">
     <link href="<c:url value='/static/t10/bootstrap.min.css' />"  rel="stylesheet"/>
     <link href="<c:url value='/static/t10/dfghrgdffbdfb6base.css' />" rel="stylesheet"/>

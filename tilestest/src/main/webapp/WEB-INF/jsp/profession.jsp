@@ -24,23 +24,23 @@
             <div class="col-md-4 col-sm-6 col-xs-12 top-margin">
 
                 <div class="warp-border">
-                    <div class="clearfix">
-                        <div class="icon-people"><img src="${item.img}"></div>
+                    <div class="clearfix" style="display: flex">
+                        <div class="icon-people"><img src="${pageContext.request.contextPath}${item.img}"></div>
                         <div class="text">
                             <h4 class="">${item.job_name}</h4>
-                            <p class="text-present">${item.description}</p>
+                            <p class="text-present" style="color: #000">${item.description}</p>
                         </div>
                     </div>
 
                     <div class="warp-class2">
                         <div class="warp-class2-text">
                             <div class="iconfont text-padding">门槛 <c:forEach var="i" begin="1" end="${item.gate}" step="1">
-                                <img src="static/images/xx.png">
+                                <img src="${pageContext.request.contextPath}/static/images/xx.png">
                                 </c:forEach></div>
                         </div>
                         <div class="warp-class2-text">
                             <div class="iconfont text-padding text-border-left">难易程度  <c:forEach var="i" begin="1" end="${item.difficulty}" step="1">
-                                <img src="static/images/xx.png">
+                                <img src="${pageContext.request.contextPath}/static/images/xx.png">
                             </c:forEach></div>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
 
                     </div>
                     <div class="warp-class2">
-                        <p class="text-p">${item.tips}</p>
+                        <p class="text-p" style="color: #000000">${item.tips}</p>
                     </div>
 
                     <div class="flip-container">

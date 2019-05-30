@@ -14,7 +14,7 @@
             <div class="row text-center">
                 <ul class="list-unstyled">
                     <li class="col-xs-12 up-1">
-                        <img alt="" src="static/images/45354312.png">
+                        <img alt="" src="${pageContext.request.contextPath}/static/images/45354312.png">
                     </li>
                     <li class="up-2 col-xs-12">高效</li>
                     <li class="up-3 col-xs-12">将三到七年的成长时间,缩短到一年到两年</li>
@@ -26,7 +26,7 @@
             <div class="row text-center">
                 <ul class="list-unstyled">
                     <li class="col-xs-12 up-1">
-                        <img alt="" src="static/images/879789.png">
+                        <img alt="" src="${pageContext.request.contextPath}/static/images/879789.png">
                     </li>
                     <li class="up-2 col-xs-12">规范</li>
                     <li class="up-3 col-xs-12">标准到实战教程,不会走弯路</li>
@@ -38,7 +38,7 @@
             <div class="row text-center">
                 <ul class="list-unstyled">
                     <li class="col-xs-12 up-1">
-                        <img alt="" src="static/images/786453654365.png">
+                        <img alt="" src="${pageContext.request.contextPath}/static/images/786453654365.png">
                     </li>
                     <li class="up-2 col-xs-12">人脉</li>
                     <li class="up-3 col-xs-12">同班好友,同院学长,技术大师,入学就混职脉圈,为以后铺平道路</li>
@@ -48,11 +48,11 @@
 
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 text-center">
             <p>
-                <img src="static/images/453254312.png">12400<br>
+                <img src="${pageContext.request.contextPath}/static/images/453254312.png">12400<br>
                 <span class="up-3">累计在线学习人数</span>
             </p>
             <p>
-                <img src="static/images/453254312.png">12400<br>
+                <img src="${pageContext.request.contextPath}/static/images/453254312.png">12400<br>
                 <span class="up-3">学员已经找到满意工作</span>
             </p>
         </div>
@@ -127,19 +127,19 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <ul class="logo">
                 <li>
-                    <a href=""><img src="static/images/123132.png"></a>
+                    <a href=""><img src="${pageContext.request.contextPath}/static/images/123132.png"></a>
                 </li>
                 <li>
-                    <a href=""> <img src="static/images/1549865.png"></a>
+                    <a href=""> <img src="${pageContext.request.contextPath}/static/images/1549865.png"></a>
                 </li>
                 <li>
-                    <a href=""> <img src="static/images/785345.png"></a>
+                    <a href=""> <img src="${pageContext.request.contextPath}/static/images/785345.png"></a>
                 </li>
                 <li>
-                    <a href=""> <img src="static/images/1471.png"></a>
+                    <a href=""> <img src="${pageContext.request.contextPath}/static/images/1471.png"></a>
                 </li>
                 <li>
-                    <a href="">  <img src="static/images/7861.png"></a>
+                    <a href="">  <img src="${pageContext.request.contextPath}/static/images/7861.png"></a>
                 </li>
             </ul>
         </div>
